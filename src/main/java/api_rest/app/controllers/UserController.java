@@ -2,7 +2,6 @@ package api_rest.app.controllers;
 
 import api_rest.app.models.entity.User;
 import api_rest.app.models.payload.MessageResponse;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,19 +22,16 @@ public class UserController {
 
     @GetMapping("users")
     public ResponseEntity<?> showAllUsers() {
-        List<User> users= userService.listAll();
-        if(users.isEmpty()) {
+        List<User> users = userService.listAll();
+        if (users.isEmpty()) {
             return ResponseEntity.noContent().build();
-        }else {
+        } else {
             return ResponseEntity.ok(
                     MessageResponse.builder()
-                    .message("Users found")
-                    .object(users)
-                    .build());
+                            .message("Users found")
+                            .object(users)
+                            .build());
         }
     }
-
-
-
 
 }

@@ -7,7 +7,9 @@ import api_rest.app.models.dto.UserDTO;
 import api_rest.app.models.entity.User;
 import api_rest.app.services.interfaces.IUserService;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -19,7 +21,6 @@ public class UserService implements IUserService {
         this.userDao = userDao;
     }
 
-
     @Override
     public List<User> listAll() {
         return userDao.findAll();
@@ -29,7 +30,7 @@ public class UserService implements IUserService {
     @Transactional
     public User registerUser(UserDTO userDto) {
 
-        //Agregar mas operacion Aqui
+        // Agregar mas operacion Aqui
 
         User user = User.builder()
                 .id(userDto.getId())
@@ -37,11 +38,10 @@ public class UserService implements IUserService {
                 .lastname(userDto.getLastname())
                 .password(userDto.getPassword())
                 .email(userDto.getEmail())
-                .creation_date(userDto.getCreation_date())
+                .creation_date(LocalDateTime.now())
                 .build();
         return userDao.save(user);
     }
-
 
     @Transactional
     @Override
@@ -52,7 +52,7 @@ public class UserService implements IUserService {
                 .lastname(userDto.getLastname())
                 .password(userDto.getPassword())
                 .email(userDto.getEmail())
-                .creation_date(userDto.getCreation_date())
+                .creation_date(LocalDateTime.now())
                 .build();
 
         return userDao.save(user);
@@ -63,14 +63,22 @@ public class UserService implements IUserService {
     public User findById(UUID id) {
         return userDao.findById(id).orElse(null);
     }
+
     @Transactional
     @Override
     public void delete(User user) {
-       userDao.delete(user);
+        userDao.delete(user);
     }
 
     @Override
     public boolean existsById(UUID id) {
         return userDao.existsById(id);
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return userDao.findByEmail(email);
+    }
+
 }
