@@ -1,6 +1,7 @@
 package api_rest.app.services.interfaces;
 
 import api_rest.app.models.dto.UserDTO;
+import api_rest.app.models.dto.UserLoginDTO;
 import api_rest.app.models.entity.User;
 
 import java.util.List;
@@ -14,6 +15,8 @@ public interface IUserService {
     User save(UserDTO userDto);
 
     User registerUser(UserDTO userDTO);
+
+    boolean validateUserInfo(User user, UserLoginDTO userlogin);
 
     User findById(UUID id);
 

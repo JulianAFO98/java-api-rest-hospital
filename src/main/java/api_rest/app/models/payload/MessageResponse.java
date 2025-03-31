@@ -1,7 +1,5 @@
 package api_rest.app.models.payload;
 
-
-
 import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
@@ -14,4 +12,5 @@ import java.io.Serializable;
 public class MessageResponse implements Serializable {
     private String message;
     private Object object;
+    private String status;
 }

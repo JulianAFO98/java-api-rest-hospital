@@ -22,7 +22,7 @@ public class UserDTO implements Serializable {
     @Size(min = 8, message = "Password needs at least 8 characters")
     private String password;
     @Email(message = "Email is invalid")
-    @NotBlank(message = "mail is required")
+    @NotBlank(message = "Email is required")
     private String email;
 
 }
